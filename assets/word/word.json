@@ -1,0 +1,42 @@
+[
+    {
+        "word": "book",
+        "Word_meaning": "کتاب",
+        "image_word": "assets/book.jpg",
+        "description": "how can I assist you with the description of a book?",
+        "Example_With_Sentence": "I love to read a good book before going to bed.",
+        "Example_With_Sentence_main": "من دوست دارم قبل خواب کتاب بخوانم"
+    },
+    {
+        "word": "class",
+        "Word_meaning": "کلاس",
+        "image_word": "assets/class.jpg",
+        "description":"",
+        "Example_With_Sentence": "I have a math class tomorrow afternoon.",
+        "Example_With_Sentence_main": "فردا بعدازظهر یک کلاس ریاضی دارم"
+    },
+    {
+        "word": "classmate",
+        "Word_meaning": "همکلاسی",
+        "image_word": "assets/classmet.jpg",
+        "description":"",
+        "Example_With_Sentence": "My classmate helped me with the project.",
+        "Example_With_Sentence_main": "هم‌کلاسی من به من در پروژه کمک کرد"
+    },
+    {
+        "word": "famous",
+        "Word_meaning": "معروف",
+        "image_word": "assets/famous.jpg",
+        "description":"",
+        "Example_With_Sentence": "Leonardo da Vinci is a famous artist and inventor.",
+        "Example_With_Sentence_main": "لئوناردو داوینچی یک هنرمند و مخترع معروف"
+    },
+    {
+        "word": "married",
+        "Word_meaning": "ازدواج و متاهل",
+        "image_word": "assets/married.jpg",
+        "description":"",
+        "Example_With_Sentence": "Sarah and John have been happily married for ten years",
+        "Example_With_Sentence_main": "سارا و جان ده سال است که با خوشبختی ازدواج کرده‌اند"
+    }
+]

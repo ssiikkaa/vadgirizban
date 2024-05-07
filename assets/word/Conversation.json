@@ -1,0 +1,27 @@
+[
+    {
+        "Conversation":"Have you read the book that Sarah wrote in our class?",
+        "Conversation_FA":"آیا کتابی که سارا در کلاس ما نوشته خوانده‌ای؟",
+        "is_man":true
+    },
+    {
+        "Conversation":"Yes, I have! She is so talented. She might become famous one day.",
+        "Conversation_FA":"بله، خوانده‌ام! او خیلی استعداد دار است. ممکن است یک روز مشهور شود",
+        "is_man":false
+    },
+    {
+        "Conversation":"I wouldn't be surprised. She was always very creative",
+        "Conversation_FA":" من از حیرت نمی‌افتم. او همیشه بسیار خلاق بود",
+        "is_man":true
+    },
+    {
+        "Conversation":"Did you know she got married to Mark, our classmate from back then?",
+        "Conversation_FA":" آیا می‌دانستی که او با مارک، هم‌دانش‌آموز ما از آن زمان، ازدواج کرد؟",
+        "is_man":false
+    },
+    {
+        "Conversation":"Really? That's great news! I'm happy for them.",
+        "Conversation_FA":"واقعا؟ این خبر عالی است! برای آنها خوشحالم",
+        "is_man":true
+    }
+]
