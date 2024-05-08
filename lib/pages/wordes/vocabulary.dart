@@ -14,7 +14,8 @@ class Vocabulary extends StatefulWidget {
 }
 
 class _VocabularyState extends State<Vocabulary> {
-    List? vocabularyData = [];
+  List? vocabularyData = [];
+  bool isloding = true;
   var api_list;
   Future<List<GeAllVocabulary>?> get_api_Vocabulary() async {
     const infourl = 'http://ssiikkaabani.ir/vocabulary/vocabulary_get';
@@ -23,9 +24,12 @@ class _VocabularyState extends State<Vocabulary> {
     if (my_data.statusCode == 200) {
       var x = my_data.body;
       vocabularyData = geAllVocabularyFromJson(x);
-      setState(() {});
+      setState(() {
+        isloding = false;
+      });
     }
   }
+
   List<dynamic> jasonData = [];
 
   @override
@@ -54,49 +58,53 @@ class _VocabularyState extends State<Vocabulary> {
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 27.0),
         ),
       ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: PageView.builder(
-                // itemExtent: 10.0,
-                scrollDirection: Axis.horizontal,
-                itemCount: vocabularyData!.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 30.0, vertical: 15.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        image_word(vocabularyData![index].image),
-                        word_spik(vocabularyData![index].mainWord),
-                        SizedBox(
-                          height: myheight * 0.08,
-                        ),
-                        description(
-                          vocabularyData![index].mainWord,
-                          vocabularyData![index].meaningWord,
-                        ),
-                        SizedBox(
-                          height: myheight * 0.03,
-                        ),
-                        Container(
-                          child: Example_With_Sentence(
-                            vocabularyData![index].mainSentence,
-                            vocabularyData![index].meaningSentence,
+      body: isloding
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : SafeArea(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: PageView.builder(
+                      // itemExtent: 10.0,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: vocabularyData!.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 30.0, vertical: 15.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              image_word(vocabularyData![index].image),
+                              word_spik(vocabularyData![index].mainWord),
+                              SizedBox(
+                                height: myheight * 0.08,
+                              ),
+                              description(
+                                vocabularyData![index].mainWord,
+                                vocabularyData![index].meaningWord,
+                              ),
+                              SizedBox(
+                                height: myheight * 0.03,
+                              ),
+                              Container(
+                                child: Example_With_Sentence(
+                                  vocabularyData![index].mainSentence,
+                                  vocabularyData![index].meaningSentence,
+                                ),
+                              ),
+                              Spacer(),
+                            ],
                           ),
-                        ),
-                        Spacer(),
-                      ],
+                        );
+                      },
                     ),
-                  );
-                },
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-      ),
     );
   }
 

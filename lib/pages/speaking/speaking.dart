@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/model/api_speaking.dart';
+import 'package:flutter_application_2/widgets/my_txt.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:flutter_application_2/widgets/spik.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:http/http.dart' as http;
 
 class Speaking extends StatefulWidget {
   const Speaking({super.key});
@@ -12,6 +15,22 @@ class Speaking extends StatefulWidget {
 }
 
 class _SpeakingState extends State<Speaking> {
+  bool isLoading = true;
+
+  List? Speaking_data = [];
+  Future<List<GeAllSpeaking>?> get_api_speaking() async {
+    const infouri = 'http://ssiikkaabani.ir/speking/speking_get';
+    var my_data = await http
+        .get(Uri.parse(infouri), headers: {"Content-type": "application/json"});
+    if (my_data.statusCode == 200) {
+      var x = my_data.body;
+      Speaking_data = geAllSpeakingFromJson(x);
+      setState(() {
+        isLoading=false;
+      });
+    }
+  }
+
   stt.SpeechToText _speech = stt.SpeechToText();
   String _text = '';
 
@@ -20,6 +39,7 @@ class _SpeakingState extends State<Speaking> {
     super.initState();
     initSpeech();
     _speech.initialize(onError: (error) => print('Error: $error'));
+    get_api_speaking();
   }
 
   void startListening() {
@@ -69,32 +89,42 @@ class _SpeakingState extends State<Speaking> {
     bool is_true_spike = false;
     String textSeech = "nice to meet you";
     return Scaffold(
+      
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
-        child: SafeArea(
+        child:isLoading?const Center(
+      child: CircularProgressIndicator(),
+    ): SafeArea(
             child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text(".پس از فشردن دکمه مربط عبارت انگلیسی زیر را تلفظ کنیذ",
-                textAlign: TextAlign.end,
-                style: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                )),
+            MyText(
+              text: "پس از فشردن دکمه مربط عبارت انگلیسی زیر را تلفظ کنید"   ,
+              fontWeight: FontWeight.bold,
+              textAlign: TextAlign.end,
+              fontFamily: "my_FA",
+              size: 18.0,
+            ),
+            // const Text(".پس از فشردن دکمه مربط عبارت انگلیسی زیر را تلفظ کنیذ",
+            //     textAlign: TextAlign.end,
+            //     style: TextStyle(
+            //       fontSize: 18.0,
+            //       fontWeight: FontWeight.bold,
+            //     )),
             Spike(
-              textEN: textSeech,
+              textEN: Speaking_data![0].mainSentence,
               child: const CircleAvatar(
                   child: Center(child: Icon(Icons.play_arrow_rounded))),
             ),
             Text(
-              textSeech,
+              Speaking_data![0].mainSentence,
               style: const TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const Text("از ملاقات شما خوشحالم",
+            Text(Speaking_data![0].meaningSentence,
                 style: TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.bold,

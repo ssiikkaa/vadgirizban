@@ -18,6 +18,7 @@ class _LessonPageState extends State<LessonPage> {
   }
 
   List? lessonData = [];
+  bool isloding=true;
   var api_list;
   Future<List<GeAllLesson>?> get_api_lesson() async {
     const infourl = 'http://ssiikkaabani.ir/lesson/lesson_get';
@@ -26,7 +27,7 @@ class _LessonPageState extends State<LessonPage> {
     if (my_data.statusCode == 200) {
       var x = my_data.body;
       lessonData = geAllLessonFromJson(x);
-      setState(() {});
+      setState(() {isloding=false;});
     }
   }
 
@@ -39,7 +40,11 @@ class _LessonPageState extends State<LessonPage> {
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 27.0),
         ),
       ),
-      body: SafeArea(
+      body:isloding
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : SafeArea(
           child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 0.0),
         child: ListView.builder(
