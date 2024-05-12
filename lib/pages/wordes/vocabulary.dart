@@ -2,9 +2,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_2/model/api_vocabulary.dart';
+import 'package:flutter_application_2/widgets/loder.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_application_2/widgets/my_txt.dart';
 import 'package:flutter_application_2/widgets/spik.dart';
+import 'package:lottie/lottie.dart';
 
 class Vocabulary extends StatefulWidget {
   const Vocabulary({super.key});
@@ -35,17 +37,17 @@ class _VocabularyState extends State<Vocabulary> {
   @override
   void initState() {
     super.initState();
-    loadJasonData();
+  
     get_api_Vocabulary();
   }
 
-  Future<void> loadJasonData() async {
-    var jasonString = await rootBundle.loadString("assets/word/word.json");
-    setState(() {
-      jasonData = json.decode(jasonString);
-    });
-    print(jasonData);
-  }
+  // Future<void> loadJasonData() async {
+  //   var jasonString = await rootBundle.loadString("assets/word/word.json");
+  //   setState(() {
+  //     jasonData = json.decode(jasonString);
+  //   });
+  //   print(jasonData);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -59,9 +61,9 @@ class _VocabularyState extends State<Vocabulary> {
         ),
       ),
       body: isloding
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
+          ? LoderWidgets()
+              // CircularProgressIndicator(),
+            
           : SafeArea(
               child: Column(
                 children: [

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/components/slideAnimation.dart';
 import 'package:flutter_application_2/pages/conversation/canversation.dart';
+import 'package:flutter_application_2/pages/grammers/grammer.dart';
 import 'package:flutter_application_2/pages/home/listening/listening.dart';
 import 'package:flutter_application_2/pages/speaking/speaking.dart';
 import 'package:flutter_application_2/pages/wordes/vocabulary.dart';
@@ -70,7 +71,7 @@ class _LearningPageState extends State<LearningPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const Vocabulary(),
+                    builder: (context) => const GrammerPage(),
                   ),
                 );
               },

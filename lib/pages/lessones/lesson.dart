@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/model/api_lesson.dart';
 import 'package:flutter_application_2/pages/learnig/learning.dart';
+import 'package:flutter_application_2/widgets/loder.dart';
 import 'package:http/http.dart' as http;
 
 class LessonPage extends StatefulWidget {
@@ -42,7 +43,7 @@ class _LessonPageState extends State<LessonPage> {
       ),
       body:isloding
           ? Center(
-              child: CircularProgressIndicator(),
+              child: LoderWidgets(),
             )
           : SafeArea(
           child: Padding(

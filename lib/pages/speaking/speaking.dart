@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/model/api_speaking.dart';
+import 'package:flutter_application_2/widgets/loder.dart';
 import 'package:flutter_application_2/widgets/my_txt.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:flutter_application_2/widgets/spik.dart';
@@ -26,7 +27,7 @@ class _SpeakingState extends State<Speaking> {
       var x = my_data.body;
       Speaking_data = geAllSpeakingFromJson(x);
       setState(() {
-        isLoading=false;
+        isLoading = false;
       });
     }
   }
@@ -89,75 +90,77 @@ class _SpeakingState extends State<Speaking> {
     bool is_true_spike = false;
     String textSeech = "nice to meet you";
     return Scaffold(
-      
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
-        child:isLoading?const Center(
-      child: CircularProgressIndicator(),
-    ): SafeArea(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            MyText(
-              text: "پس از فشردن دکمه مربط عبارت انگلیسی زیر را تلفظ کنید"   ,
-              fontWeight: FontWeight.bold,
-              textAlign: TextAlign.end,
-              fontFamily: "my_FA",
-              size: 18.0,
-            ),
-            // const Text(".پس از فشردن دکمه مربط عبارت انگلیسی زیر را تلفظ کنیذ",
-            //     textAlign: TextAlign.end,
-            //     style: TextStyle(
-            //       fontSize: 18.0,
-            //       fontWeight: FontWeight.bold,
-            //     )),
-            Spike(
-              textEN: Speaking_data![0].mainSentence,
-              child: const CircleAvatar(
-                  child: Center(child: Icon(Icons.play_arrow_rounded))),
-            ),
-            Text(
-              Speaking_data![0].mainSentence,
-              style: const TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(Speaking_data![0].meaningSentence,
-                style: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                )),
-            form_container(
-              Center(
-                child: Text(_wordsSpoken,
-                    style: TextStyle(
+        child: isLoading
+            ? const Center(
+                child: LoderWidgets(),
+              )
+            : SafeArea(
+                child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  MyText(
+                    text:
+                        "پس از فشردن دکمه مربط عبارت انگلیسی زیر را تلفظ کنید",
+                    fontWeight: FontWeight.bold,
+                    textAlign: TextAlign.end,
+                    fontFamily: "my_FA",
+                    size: 18.0,
+                  ),
+                  // const Text(".پس از فشردن دکمه مربط عبارت انگلیسی زیر را تلفظ کنیذ",
+                  //     textAlign: TextAlign.end,
+                  //     style: TextStyle(
+                  //       fontSize: 18.0,
+                  //       fontWeight: FontWeight.bold,
+                  //     )),
+                  Spike(
+                    textEN: Speaking_data![0].mainSentence,
+                    child: const CircleAvatar(
+                        child: Center(child: Icon(Icons.play_arrow_rounded))),
+                  ),
+                  Text(
+                    Speaking_data![0].mainSentence,
+                    style: const TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
-                      color: _wordsSpoken == textSeech
-                          ? Colors.green.withOpacity(0.77)
-                          : Colors.red.withOpacity(0.77),
-                    )),
-              ),
-            ),
-            _wordsSpoken == ""
-                ? SizedBox()
-                : Icon(
-                    _wordsSpoken == textSeech
-                        ? IconlyBold.tickSquare
-                        : IconlyBold.closeSquare,
-                    color: _wordsSpoken == textSeech
-                        ? Colors.green.withOpacity(0.77)
-                        : Colors.red.withOpacity(0.77),
-                    size: 40.0,
+                    ),
                   ),
-            SizedBox(
-              height: myheight * 0.12,
-            ),
-            my_container_mic(),
-          ],
-        )),
+                  Text(Speaking_data![0].meaningSentence,
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                      )),
+                  form_container(
+                    Center(
+                      child: Text(_wordsSpoken,
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                            color: _wordsSpoken == textSeech
+                                ? Colors.green.withOpacity(0.77)
+                                : Colors.red.withOpacity(0.77),
+                          )),
+                    ),
+                  ),
+                  _wordsSpoken == ""
+                      ? SizedBox()
+                      : Icon(
+                          _wordsSpoken == textSeech
+                              ? IconlyBold.tickSquare
+                              : IconlyBold.closeSquare,
+                          color: _wordsSpoken == textSeech
+                              ? Colors.green.withOpacity(0.77)
+                              : Colors.red.withOpacity(0.77),
+                          size: 40.0,
+                        ),
+                  SizedBox(
+                    height: myheight * 0.12,
+                  ),
+                  my_container_mic(),
+                ],
+              )),
       ),
     );
   }
